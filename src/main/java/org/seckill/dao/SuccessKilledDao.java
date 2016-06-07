@@ -1,5 +1,7 @@
 package org.seckill.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.seckill.entity.SuccessKilled;
 
@@ -18,5 +20,5 @@ public interface SuccessKilledDao {
 	 * @param seckillId
 	 * @return
 	 */
-	SuccessKilled queryByIdWithSeckill(long seckillId);
+	SuccessKilled queryByIdWithSeckill(@Param("seckillId")long seckillId, @Param("userPhone")long userPhone);
 }

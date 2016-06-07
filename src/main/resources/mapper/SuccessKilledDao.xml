@@ -4,12 +4,12 @@
 <mapper namespace="org.seckill.dao.SuccessKilledDao">
 	<insert id="insertSuccessKilled">
 		<!-- 主键冲突报错，忽略错误 -->
-		insert ignore into seckill(seckill_id,user_phone) values(#{seckillId},#{userPhone});
+		insert ignore into success_killed(seckill_id,user_phone,state) values(#{seckillId},#{userPhone},0);
 	</insert>
 	
 	<select id="queryByIdWithSeckill" resultType="SuccessKilled">
 		<!-- 根据Id查询SuccessKilled并携带Seckill -->
-		select sk.seckill_id,sk.user_phone,sk.create_time,
+		select sk.seckill_id,sk.user_phone,sk.state,sk.create_time,
 			   s.seckill_id "seckill.seckill_id",
 			   s.name "seckill.name",
 			   s.number "seckill.number",
@@ -19,6 +19,6 @@
 		from success_killed sk
 		inner join seckill s 
 		on sk.seckill_id = s.seckill_id
-		where sk.seckill_id = #{seckillId};
+		where sk.seckill_id = #{seckillId} and sk.user_phone = #{userPhone};
 	</select>
 </mapper>
