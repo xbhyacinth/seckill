@@ -22,10 +22,10 @@ KEY idx_create_time(create_time)
 insert into
 	seckill (name,number,start_time,end_time)
 values
-	('1000元秒杀IPhone6',100,'2016-06-04 00:00:00','2016-06-05 00:00:00'),
-	('500元秒杀Ipad2',200,'2016-06-04 00:00:00','2016-06-05 00:00:00'),
-	('300元秒杀小米4',300,'2016-06-04 00:00:00','2016-06-05 00:00:00'),
-	('200元秒杀红米note',400,'2016-06-04 00:00:00','2016-06-05 00:00:00');
+	('1000元秒杀IPhone6',100,'2016-06-10 00:00:00','2016-06-11 00:00:00'),
+	('500元秒杀Ipad2',200,'2016-06-11 00:00:00','2016-06-12 00:00:00'),
+	('300元秒杀小米4',300,'2016-06-12 00:00:00','2016-06-13 00:00:00'),
+	('200元秒杀红米note',400,'2016-06-11 00:00:00','2016-06-12 00:00:00');
 
 -- 秒杀成功明细表
 -- 用户登录认证相关信息
@@ -37,3 +37,6 @@ create_time timestamp NOT NULL  COMMENT '创建时间',
 PRIMARY KEY (seckill_id,user_phone),
 KEY idx_create_time(create_time)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秒杀成功明细表';
+
+//修改timestamp默认的on update current_timestamp
+alter table seckill change start_time start_time timestamp not null default current_timestamp;
