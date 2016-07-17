@@ -1,15 +1,11 @@
 package org.seckill.dao.cache;
 
-import org.seckill.entity.Seckill;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
-
+import org.seckill.entity.Seckill;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -83,7 +79,7 @@ public class RedisDao {
 	
 	/**
 	 * 获取token
-	 * @param seckill
+	 * @param seckillId
 	 * @return
 	 */
 	public String getToken(long seckillId){
@@ -101,6 +97,41 @@ public class RedisDao {
         }
         return null;
     }
+
+    /**
+     * 将token push进redis队列
+     */
+    public void pushToken(long seckillId,String token){
+        try {
+            Jedis jedis = jedisPool.getResource();
+            try {
+                String key = "token:" + seckillId;
+                jedis.lpush(key, token);
+            }finally {
+                jedis.close();
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 将token push进redis队列
+     */
+    public void del(String key){
+        try {
+            Jedis jedis = jedisPool.getResource();
+            try {
+                jedis.del(key);
+            }finally {
+                jedis.close();
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+        }
+    }
+
+
 
 	public void setTokenSet(String md5, long seckillId) {
 		try {
@@ -131,4 +162,5 @@ public class RedisDao {
         }
 		return false;
 	}
-}
+
+}}
