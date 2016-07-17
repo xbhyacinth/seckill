@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -43,7 +44,7 @@ public class SeckillServiceImpl implements SeckillService {
 	private final String slat = "djfjhueuweur832hsiudy87e81@&^&#";
 
 	public List<Seckill> getSeckillList() {
-		return seckillDao.queryAll(0, 4);
+		return seckillDao.queryAll(0, 12);
 	}
 
 	public Seckill getById(long seckillId) {
@@ -163,5 +164,15 @@ public class SeckillServiceImpl implements SeckillService {
             return new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
         }
 	}
+
+    public void addSeckill(Seckill seckill)  {
+        Assert.notNull(seckill);
+        seckillDao.addBySeckill(seckill);
+    }
+
+    public void updateSeckill(Seckill seckill) {
+        Assert.notNull(seckill);
+        seckillDao.updateBySecKill(seckill);
+    }
 
 }

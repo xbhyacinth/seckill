@@ -1,5 +1,9 @@
 package org.seckill.web;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.dto.SeckillResult;
@@ -14,9 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping(value="/seckill")
@@ -34,6 +35,12 @@ public class SeckillController {
 		return "list"; //WEB-INF/jsp/list.jsp
 	}
 
+    @RequestMapping(value="/manage",method=RequestMethod.GET)
+    public String manage(Model model) {
+        List<Seckill> list = seckillService.getSeckillList();
+        model.addAttribute("manage", list);
+        return "manage"; //WEB-INF/jsp/list.jsp
+    }
 	@RequestMapping(value="/{seckillId}/detail",method=RequestMethod.GET)
 	public String detail(@PathVariable("seckillId")Long seckillId, Model model) {
 		if(seckillId == null) {
@@ -99,8 +106,64 @@ public class SeckillController {
 
 
 	@RequestMapping(value = "time/now",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
-	@ResponseBody
-	public SeckillResult<Long> execute() {
-		return new SeckillResult<Long>(true,new Date().getTime());
-	}
+    @ResponseBody
+    public SeckillResult<Long> execute() {
+        return new SeckillResult<Long>(true,new Date().getTime());
+    }
+
+
+    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public SeckillResult addKillSku(@PathVariable("name") String name,@PathVariable("number") Integer number,@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) {
+        SeckillResult result=new SeckillResult();
+        Seckill seckill=new Seckill();
+        SimpleDateFormat  sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime=startTime.replace("a","-");
+        startTime=startTime.replace("b"," ");
+        startTime=startTime.replace("c",":");
+        endTime=endTime.replace("a","-");
+        endTime=endTime.replace("b"," ");
+        endTime=endTime.replace("c",":");
+        try{
+            Date st=sdf.parse(startTime);
+            Date et=sdf.parse(endTime);
+            seckill.setName(name);
+            seckill.setNumber(number);
+            seckill.setStartTime(st);
+            seckill.setEndTime(et);
+            seckill.setCreateTime(new Date());
+            seckillService.addSeckill(seckill);
+            result.setSuccess(true);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            result.setError(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
+    //    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+//    @ResponseBody
+//    public void addKillSku(@PathVariable("name") String name,@PathVariable("number") Integer number) {
+    @RequestMapping(value="/{seckillId}/{number}/updateKillSku")
+    @ResponseBody
+    public SeckillResult updateKillSku(@PathVariable("seckillId") long seckillId,@PathVariable("number") Integer number) {
+        SeckillResult result=new SeckillResult();
+        Seckill seckill=new Seckill();
+        seckill.setNumber(number);
+        seckill.setSeckillId(seckillId);
+        try{
+            seckillService.updateSeckill(seckill);
+            result.setSuccess(true);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            result.setError(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result;
+    }
+
+
+
+
 }

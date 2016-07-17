@@ -6,4 +6,6 @@ package org.seckill.service;
 public interface StockService {
 
     long initRedisStock(long seckillId);
+
+	long saveToMySql(Long seckillId);
 }

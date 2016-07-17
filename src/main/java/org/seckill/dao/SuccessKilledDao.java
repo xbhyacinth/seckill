@@ -21,4 +21,11 @@ public interface SuccessKilledDao {
 	 * @return
 	 */
 	SuccessKilled queryByIdWithSeckill(@Param("seckillId")long seckillId, @Param("userPhone")long userPhone);
+
+	/**
+	 * 批量插入成功记录
+	 * @param successOrders
+	 * @return
+	 */
+	int batchInsert(List<SuccessKilled> successOrders);
 }

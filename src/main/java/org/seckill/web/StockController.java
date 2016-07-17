@@ -28,8 +28,15 @@ public class StockController {
 
     @RequestMapping(value="/init/{seckillId}",method= RequestMethod.GET)
     @ResponseBody
-    public String list(Model model,@PathVariable("seckillId")Long seckillId) {
+    public String init(Model model,@PathVariable("seckillId")Long seckillId) {
         long size = stockService.initRedisStock(seckillId);
         return "init "+size+" token finish!";
+    }
+    
+    @RequestMapping(value="/save/{seckillId}",method= RequestMethod.GET)
+    @ResponseBody
+    public String save(Model model,@PathVariable("seckillId")Long seckillId) {
+        long size = stockService.saveToMySql(seckillId);
+        return "Success order number: "+size+" !";
     }
 }

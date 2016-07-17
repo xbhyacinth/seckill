@@ -55,4 +55,14 @@ public interface SeckillService {
 	 * @throws SeckillCloseException
 	 */
     SeckillExecution executeSeckillByProcedure(long seckillId, long userPhone, String md5) throws SeckillException, RepeatKillException, SeckillCloseException;
+
+    /**
+     * 加入秒杀商品信息
+     */
+    void addSeckill(Seckill seckill);
+
+    /**
+     * 加入秒杀商品信息
+     */
+    void updateSeckill(Seckill seckill) ;
 }

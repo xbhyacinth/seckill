@@ -1,0 +1,179 @@
+body{font:12px/1.5 "Microsoft Yahei",tahoma,arial,"Hiragino Sans GB";background-color:#f9f9f9;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.main{clear:none!important;*zoom:1}
+.main:after{content:"";clear:both;display:block!important;height:0}
+.content{float:left}
+img{width:100%}
+a,ins{text-decoration:none}
+.none{display:none}
+.footer,.site-nav .site-nav-bd{width:1190px}
+.footer{margin:0 auto;border-top:0}
+.container{width:100%;padding-top:28px;padding-bottom:60px}
+.container .container-wrap{position:relative;width:1190px;margin:0 auto;clear:none!important;*zoom:1;*z-index:1}
+.container .container-wrap:after{content:"";clear:both;display:block!important;height:0}
+.container .content{width:920px;padding-left:12px;margin-right:40px}
+.container .title{position:relative;height:34px;font-size:20px;color:#666}
+.container .title h3{height:28px;line-height:28px;margin-top:6px;padding-left:10px;border-left:6px solid #e63140;font-weight:400}
+.loading{width:100%;height:200px;background:url(https://img.alicdn.com/tps/i3/T1b1m3XkVpXXXXXXXX-32-32.gif) no-repeat center 50px}
+.batch .batch-banner,.qg-img{background:url(https://img.alicdn.com/tps/i2/TB1M1AVIXXXXXaZXXXX8cmFHXXX-171-53.png) no-repeat center center}
+.batch .item-pic,.hot-rank .item-pic{background:url(https://img.alicdn.com/tps/i4/TB1ZmgVIXXXXXa6XXXXZTBS9VXX-100-31.png) no-repeat center center}
+#server-num{display:none}
+.app-nav{height:56px;width:100%;min-width:1190px;background-color:#e63140;clear:none!important;*zoom:1}
+.app-nav:after{content:"";clear:both;display:block!important;height:0}
+.app-nav .app-nav-wrap{width:1190px;margin:0 auto}
+.app-nav .logo{float:left;width:105px;height:40px;margin:10px 100px 0 8px;background:url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat 0 0;text-indent:-9999px;overflow:hidden}
+.app-nav .app-nav-list{float:left;padding-top:14px}
+.app-nav .app-nav-list li{float:left}
+.app-nav .app-nav-list a{display:block;height:29px;line-height:29px;margin:0 15px;padding:0 12px;font-size:18px;color:#fff}
+.app-nav .app-nav-list .active,.app-nav .app-nav-list a:hover{text-decoration:none;color:#fa2b3c;background-color:#fff;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
+.app-nav .app-nav-right{float:right;padding-top:14px}
+.app-nav .feature-list{float:left;margin-right:35px;color:#fcdcdd}
+.app-nav .feature-list li{float:left;height:32px;line-height:32px;margin-right:28px;font-size:14px;overflow:hidden}
+.app-nav .feature-list li i{display:inline-block;width:32px;height:32px;margin-right:6px;background:url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat;vertical-align:middle;font-size:0}
+.app-nav .feature-list .limit i{background-position:0 -48px}
+.app-nav .feature-list .lowest-price i{background-position:-39px -48px}
+.app-nav .feature-list .free-shipping i{background-position:-78px -48px}
+.app-nav .seller-apply{float:left;height:29px;line-height:29px;margin-right:15px;font-size:18px;color:#fff;overflow:hidden}
+.app-nav .seller-apply i{display:inline-block;width:29px;height:29px;margin-right:6px;background:url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat -117px -48px;vertical-align:top;font-size:0}
+.app-nav .seller-apply:hover{text-decoration:none}
+.aside{position:absolute;z-index:100;width:178px;right:46px;background-color:#fff;*zoom:1;overflow:hidden}
+.aside .aside-wrap{padding-top:20px}
+.aside .qrcode{display:block;width:132px;height:132px;margin:0 auto 18px}
+.aside .brand,.aside .category,.aside .nav-link,.aside .theme{padding-top:15px;padding-bottom:14px;margin:0 18px;border-top:1px solid #e6e6e6;clear:none!important;*zoom:1}
+.aside .brand:after,.aside .category:after,.aside .nav-link:after,.aside .theme:after{content:"";clear:both;display:block!important;height:0}
+.aside .brand li,.aside .category li,.aside .nav-link li,.aside .theme li{float:left;width:71px;height:24px;margin-bottom:6px;overflow:hidden}
+.aside .brand a,.aside .category a,.aside .nav-link a,.aside .theme a{display:inline-block;*display:inline;*zoom:1;max-width:60px;height:24px;line-height:24px;padding-left:5px;padding-right:9px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;font-size:14px;color:#666;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.aside .brand a:hover,.aside .category a:hover,.aside .nav-link a:hover,.aside .theme a:hover{text-decoration:none;background-color:#fa2b3c;color:#fff}
+.aside .brand .active a,.aside .category .active a,.aside .nav-link .active a,.aside .theme .active a{background-color:#fa2b3c;color:#fff}
+.aside .nav-link{padding-top:0;padding:6px 0;border:none}
+.aside .theme li{margin-bottom:8px}
+.aside .brand-list .brand-sep{height:12px;background:#f9f9f9}
+.aside .brand-list .brand-title{height:20px;line-height:20px;padding-left:10px;border-left:8px solid #febdbe;color:#fc353a;font-size:16px}
+.aside .brand-list .brand-title-current{margin-top:10px}
+.aside .brand-list .brand-title-future{color:#4dc340;border-left-color:#8defa1}
+.aside .brand{border-top:none;background:#fff}
+.aside .brand li{float:none;width:auto}
+.aside .brand a{max-width:100px}
+.back-top{position:fixed;right:40px;bottom:40px;z-index:199;display:none;height:40px;width:40px;background:#ccc url(https://img.alicdn.com/tps/i3/TB1a9ZVIXXXXXb5XVXXGEZzGpXX-40-40.png) no-repeat center center;*zoom:1;*cursor:pointer}
+.back-top:hover{background-color:#fc353a}
+.qg-item{position:relative;display:block;float:left;width:448px;border:1px solid #f9f9f9;height:220px;margin-bottom:10px;margin-right:10px;background-color:#fff;*zoom:1}
+a.qg-item{*cursor:pointer}
+a.qg-item:hover{border-color:#fc353a;text-decoration:none}
+.qg-item .qg-img-tag{position:absolute;top:4px;left:4px;height:60px;width:60px;z-index:5}
+.qg-item .qg-img{*position:relative;float:left;width:220px;height:220px;margin-right:10px;text-align:center;*z-index:-1}
+.qg-item .qg-detail{float:left;width:204px;padding-top:10px;overflow:hidden}
+.qg-item .qg-detail .name{height:74px}
+.qg-item .qg-detail .des{line-height:26px;font-size:16px;color:#333;letter-spacing:1px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qg-item .qg-detail .tags{position:absolute;top:5px;left:0;margin-right:-4px;font-size:0}
+.qg-item .qg-detail .tags li{display:inline-block;*display:inline;*zoom:1;height:22px;line-height:22px;margin-right:4px;margin-bottom:4px;padding:0 5px;background-color:#fcdcdd;font-size:12px;color:#fc353a}
+.qg-item .qg-detail .subtitle{color:#fc353a;font-size:15px}
+.qg-item .qg-detail .link{position:relative;padding-top:26px}
+.qg-item .qg-detail .price{font-size:0;font-family:arial,sans-serif}
+.qg-item .qg-detail .price .original-price,.qg-item .qg-detail .price .promo-price{display:inline-block;*display:inline;*zoom:1;width:110px}
+.qg-item .qg-detail .price .original-price{line-height:20px;font-size:14px;color:#aaa;text-decoration:line-through}
+.qg-item .qg-detail .price .original-price i{margin-left:2px;font-style:normal}
+.qg-item .qg-detail .price .promo-price{line-height:30px;font-size:20px;color:#fc353a}
+.qg-item .qg-detail .price .promo-price em{margin-left:2px;font-weight:700;font-size:32px;vertical-align:baseline}
+.qg-item .qg-detail .price .promo-price em span{font-size:18px}
+.qg-item .qg-detail .price .promo-price em span.price-coin{font-size:12px}
+.qg-item .qg-detail .link-btn{position:absolute;right:0;top:37px;width:82px;height:38px;border:1px solid #fcdcdd;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;font-size:18px;line-height:38px;text-align:center;color:#fc353a;background-color:#fcdcdd}
+.qg-item .qg-detail .link-btn:hover{text-decoration:none}
+.qg-item .qg-detail .process{margin-top:10px}
+.qg-item .qg-detail .process-text{clear:none!important;*zoom:1}
+.qg-item .qg-detail .process-text:after{content:"";clear:both;display:block!important;height:0}
+.qg-item .qg-detail .process-text span{display:block;height:18px;line-height:18px;font-size:13px;color:#aaa}
+.qg-item .qg-detail .process-text .percent{float:left}
+.qg-item .qg-detail .process-text .num{float:right}
+.qg-item .qg-detail .process-bar{margin-top:5px;width:202px;height:9px;border:1px solid #febdbe;-webkit-border-radius:12px;-moz-border-radius:12px;border-radius:12px;font-size:0;overflow:hidden}
+.qg-item .qg-detail .process-bar span{display:inline-block;*display:inline;*zoom:1;width:100px;height:9px;background-color:#febdbe}
+.qg-ing .qg-detail .link-btn{border-color:#fcdcdd;color:#fc353a;background-color:#fcdcdd}
+.qg-ing .qg-detail .process-text span{color:#aaa}
+.qg-done .qg-detail .subtitle{color:#aaa}
+.qg-done .qg-detail .link-btn{border-color:#ddd;color:#fff;background-color:#ddd}
+.qg-done .qg-detail .process-text span{color:#aaa}
+.qg-will .qg-detail .link-btn{width:92px;border-color:#aaffa0;color:#4dc340;background-color:#fff}
+.qg-will .qg-detail .process-text span{color:#4dc340}
+.container .title-r{position:absolute;right:10px;top:-6px;*top:0;font-size:100%;clear:none!important;*zoom:1}
+.container .title-r:after{content:"";clear:both;display:block!important;height:0}
+.container .title-r span{display:inline-block;height:34px;line-height:40px;color:#666;font-family:"Microsoft Yahei",tahoma,arial,"Hiragino Sans GB";vertical-align:top}
+.container .title-r .clock{position:relative;top:4px;float:right\9;*float:none;font-family:arial;font-size:16px;line-height:34px}
+.container .title-r .clock s{text-decoration:none}
+.container .title-r .clock s.digital{padding:2px 3px;margin:0 1px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#fff;background:#666}
+.app-footer{height:205px;width:1190px;margin:0 auto}
+.app-footer ul{clear:none!important;*zoom:1;width:910px;padding-top:20px;padding-left:12px;border-top:1px solid #ddd}
+.app-footer ul:after{content:"";clear:both;display:block!important;height:0}
+.app-footer li{float:left}
+.app-footer h3{height:24px;line-height:24px;margin-bottom:10px;font-size:16px;font-weight:400;color:#666}
+.app-footer .qg-about,.app-footer .qg-app,.app-footer .qg-feature,.app-footer .qg-qn,.app-footer .qg-say{width:180px}
+.app-footer .qg-about a,.app-footer .qg-say a{display:block;width:84px;height:18px;line-height:18px;margin-bottom:8px;font-size:12px;color:#999;*zoom:1;*cursor:pointer}
+.app-footer .qrcode{width:110px;height:110px}
+.app-footer .qg-feature span{display:inline-block;*display:inline;*zoom:1;height:29px;line-height:29px;margin-bottom:20px;font-size:20px;color:#fc353a}
+.app-footer .qg-feature span i{display:inline-block;width:29px;height:29px;margin-right:18px;background:url(https://img.alicdn.com/tps/TB18UAZIXXXXXc.XFXXXXXXXXXX.png) no-repeat;vertical-align:middle;font-size:0}
+.app-footer .qg-feature .limit i{background-position:0 -39px}
+.app-footer .qg-feature .lowest-price i{background-position:-39px -39px}
+.app-footer .qg-feature .free-shipping i{background-position:-78px -39px}
+.tms-module{width:100%;height:340px;background-color:#eee;-webkit-transition:background-color .5s linear;-moz-transition:background-color .5s linear;transition:background-color .5s linear;clear:none!important;*zoom:1}
+.tms-module:after{content:"";clear:both;display:block!important;height:0}
+.tms-module .tms-module-wrap{position:relative;width:1190px;margin:0 auto;overflow:hidden}
+.tms-module .promo{position:relative;float:left;width:920px;height:340px;overflow:hidden}
+.tms-module .promo .tab-content{position:relative;width:920px;height:340px;overflow:hidden}
+.tms-module .promo .tab-pannel{float:left;display:block;width:920px;height:340px;overflow:hidden}
+.tms-module .promo .tab-pannel img{width:100%;height:100%}
+.tms-module .promo .tab-nav{position:absolute;bottom:24px;left:50%;display:none;height:10px;text-align:center;font-size:0;margin-left:-33px}
+.tms-module .promo .tab-nav li{display:inline-block;*display:inline;*zoom:1;vertical-align:middle;margin-right:4px}
+.tms-module .promo .tab-nav a{display:block;padding-top:10px;width:10px;height:0;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;background:#fff;font-size:0;overflow:hidden}
+.tms-module .promo .tab-nav .selected a{background-color:#f76571}
+.tms-module .banner{float:left;width:270px;height:340px;font-size:0;overflow:hidden}
+.tms-module .banner a{display:inline-block;*display:inline;*zoom:1;width:270px;height:170px;font-size:0;overflow:hidden}
+.tms-module .banner img{width:100%;height:100%}
+.tms-module .c-nav{position:absolute;left:0;top:0;width:184px;height:340px;background:rgba(255,255,255,.8);filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#CCFFFFFF', EndColorStr='#CCFFFFFF');overflow:hidden}
+:root .tms-module .c-nav{filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00000000', EndColorStr='#00000000')}
+.tms-module .c-nav .category,.tms-module .c-nav .theme{margin:0 18px;clear:none!important;*zoom:1}
+.tms-module .c-nav .category:after,.tms-module .c-nav .theme:after{content:"";clear:both;display:block!important;height:0}
+.tms-module .c-nav .category{padding-top:15px;padding-bottom:10px;border-bottom:1px solid #e2e2e2}
+.tms-module .c-nav .theme{padding-bottom:15px;padding-top:10px}
+.tms-module .c-nav .theme li{margin-bottom:8px}
+.tms-module .c-nav li{float:left;width:74px;height:24px;margin-bottom:6px;overflow:hidden}
+.tms-module .c-nav a{display:inline-block;*display:inline;*zoom:1;max-width:60px;height:24px;line-height:24px;padding-left:5px;padding-right:9px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;font-size:14px;color:#666;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.tms-module .c-nav a:hover{text-decoration:none;background-color:#fa2b3c;color:#fff}
+.tms-module .c-nav .active a{background-color:#fa2b3c;color:#fff}
+.fix-select{position:relative;z-index:101;width:100%;min-width:1190px;height:56px;clear:none!important;*zoom:1;background-color:#2e3a47}
+.fix-select:after{content:"";clear:both;display:block!important;height:0}
+.fix-select .fix-select-wrap{width:1190px;margin:0 auto}
+.fix-select .trigger-bar{display:none}
+.fix-select .time-box{position:relative;float:left;width:920px}
+.fix-select .time-box .next,.fix-select .time-box .prev{position:absolute;top:0;width:33px;height:56px;background:#171d23 url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat;cursor:pointer}
+.fix-select .time-box .prev{left:0;background-position:0 -84px}
+.fix-select .time-box .next{right:0;background-position:-43px -84px}
+.fix-select .time-box .scrollable-panel{position:relative;width:845px;height:56px;margin:0 33px;padding:0 4px;overflow:hidden}
+.fix-select .time-box .scrollable-wrap{position:absolute}
+.fix-select .time-box .active-bg{position:absolute;top:0;left:415px;background:url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat 2px -179px;width:90px;height:66px}
+.fix-select .time-box .personalized-active-bg{left:918px}
+.fix-select .time-box .sales-active-bg{left:1009px}
+.fix-select .time-box .price-active-bg{left:1100px}
+.fix-select .time-box .scrollable-content{float:left;width:94px;padding-top:10px;overflow:hidden;cursor:pointer}
+.fix-select .time-box .scrollable-content.active .text,.fix-select .time-box .scrollable-content.active .time{color:#fff}
+.fix-select .time-box .time{font-family:Helvetica,arial,sans-serif;font-size:22px;font-weight:700;color:#888;text-align:center;line-height:22px}
+.fix-select .time-box .text{font-size:12px;color:#666;text-align:center;line-height:14px}
+.fix-select .sort-box{position:relative;float:left;width:270px;height:56px}
+.fix-select .sort-box li{float:left;width:90px;height:56px;line-height:56px;font-size:18px;color:#787d82;text-align:center;cursor:pointer}
+.fix-select .sort-box li i{display:inline-block;width:16px;height:56px;margin-left:4px;background:url(https://img.alicdn.com/tps/i2/TB1pwR4LpXXXXahXFXXaLEvUFXX-277-362.png) no-repeat;vertical-align:middle}
+.fix-select .sort-box .sales i{background-position:-110px -86px}
+.fix-select .sort-box .price i{background-position:-144px -86px}
+.fix-select .sort-box .active{color:#fff}
+.fix-select .sort-box .active.sales i{background-position:-93px -86px}
+.fix-select .sort-box .active.price i{background-position:-127px -86px}
+.container .limit-box{padding-bottom:35px}
+.container .limit-box .loading{float:left}
+.container .qg-limit-list{min-height:500px;margin-top:24px;clear:none!important;*zoom:1}
+.container .qg-limit-list:after{content:"";clear:both;display:block!important;height:0}
+.container .trigger-btn{margin-right:10px;padding-top:26px;text-align:center;font-size:0}
+.container .trigger-btn span{display:inline-block;*display:inline;*zoom:1;position:relative;width:60px;height:40px;line-height:40px;cursor:pointer;background-color:#fc353a;color:#fff;font-size:14px}
+.container .trigger-btn span i{position:absolute;top:0;font-family:arial,sans-serif;font-size:18px;vertical-align:middle}
+.container .trigger-btn .prev{margin-right:10px;padding-left:30px;text-align:left}
+.container .trigger-btn .prev i{left:13px}
+.container .trigger-btn .next{padding-right:30px;text-align:right}
+.container .trigger-btn .next i{right:13px}
+.container .trigger-btn .disabled{background-color:#ddd;cursor:default}
+.container .qg-last-list{min-height:200px;margin-top:24px;clear:none!important;*zoom:1}
+.container .qg-last-list:after{content:"";clear:both;display:block!important;height:0}
+.container .aside .theme{display:none}

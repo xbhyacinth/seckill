@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <!-- 引入jstl -->
+         pageEncoding="UTF-8"%>
+<!-- 引入jstl -->
 <%@include file="common/tag.jsp" %>
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-	<%@include file="common/head.jsp" %>
+<%@include file="common/head.jsp" %>
     <title>秒杀详情页面</title>
-
   </head>
   <body>
+    <%@include file="common/header.jsp" %>
 	<div class="container">
 		<div class="panel panel-default text-center">
 			<div class="panel-heading">
@@ -57,6 +54,8 @@
 	        </div>
 	    </div>
 	</div>
+    <%@include file="common/footer.jsp" %>
+
   </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>

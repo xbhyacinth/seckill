@@ -35,4 +35,18 @@ public interface SeckillDao {
 	 * @param paramMap
 	 */
 	void executeSeckillByProcedure(Map<String, Object> paramMap);
+
+    /**
+     * 添加对象通过Seckill
+     * @param seckill
+     * @return
+     */
+    void addBySeckill(Seckill seckill);
+
+    /**
+     * 修改Seckill
+     * @param seckill
+     * @return
+     */
+    void updateBySecKill(Seckill seckill);
 }
