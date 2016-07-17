@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import com.dyuproject.protostuff.ProtostuffIOUtil;
+
+import redis.clients.jedis.Jedis;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -40,12 +44,21 @@ public class StockServiceImpl implements StockService {
 
 
     private void initRedis(long seckillId) {
-    	redisDao.del("token:" + seckillId);  //清空token队列
-    	redisDao.del("tokenSet:" + seckillId); //清空tokenSet
-//    	String stockRef = "Seckill:STOCK:" + seckillId;
-//    	redisDao.del(stockRef); //清空库存
-//    	Seckill seckill = seckillService.getById(seckillId);
-    
+    	try {
+			Jedis jedis = redisDao.getJedisPool().getResource();
+			try {
+				jedis.del("token:" + seckillId);  //清空token队列
+				jedis.del("tokenSet:" + seckillId); //清空tokenSet
+				String stockRef = "Seckill:STOCK:" + seckillId;
+				jedis.del(stockRef); //清空库存
+				Seckill seckill = seckillService.getById(seckillId);
+				jedis.set(stockRef, String.valueOf(seckill.getNumber()));//设置库存
+			} finally {
+				jedis.close();
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 	}
 
 

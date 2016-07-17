@@ -27,18 +27,18 @@ import java.util.Map;
 
 @Service
 public class SeckillServiceImpl implements SeckillService {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private SeckillDao seckillDao;
-	
+
 	@Autowired
 	private SuccessKilledDao successKilledDao;
-	
-	@Autowired 
+
+	@Autowired
 	private RedisDao redisDao;
-	
+
 	//md5盐值字符串，混淆
 	private final String slat = "djfjhueuweur832hsiudy87e81@&^&#";
 
@@ -56,19 +56,19 @@ public class SeckillServiceImpl implements SeckillService {
 //			return new Exposer(false,seckillId);
 //		}
 		//1、访问redis
-        Seckill seckill = redisDao.getSeckill(seckillId);
-        if(null == seckill){
-            //2、访问数据库
-            seckill = getById(seckillId);
-            if(null == seckill){
-                //当前无秒杀库存商品
-                return new Exposer(false, seckillId);
-            }else{
-                //3、放入redis
-                redisDao.putSeckill(seckill);
-            }
-        }
-        
+		Seckill seckill = redisDao.getSeckill(seckillId);
+		if(null == seckill){
+			//2、访问数据库
+			seckill = getById(seckillId);
+			if(null == seckill){
+				//当前无秒杀库存商品
+				return new Exposer(false, seckillId);
+			}else{
+				//3、放入redis
+				redisDao.putSeckill(seckill);
+			}
+		}
+
 		Date startTime = seckill.getStartTime();
 		Date endTime  = seckill.getEndTime();
 		Date nowTime = new Date();
@@ -86,7 +86,7 @@ public class SeckillServiceImpl implements SeckillService {
 		String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
 		return md5;
 	}
-	
+
 	@Transactional
 	/**
 	 * 使用注解控制事务的优点：
@@ -115,7 +115,7 @@ public class SeckillServiceImpl implements SeckillService {
 				} else {
 					SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(id,userPhone);
 					return new SeckillExecution(id,SeckillStateEnum.SUCCESS,successKilled);
-				}			
+				}
 			}
 		} catch(SeckillCloseException e1) {
 			throw e1;
@@ -127,12 +127,12 @@ public class SeckillServiceImpl implements SeckillService {
 			throw new SeckillException("seckill inner error: " + e.getMessage());
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public SeckillExecution executeSeckillByProcedure(long seckillId,
-			long userPhone, String md5) throws SeckillException,
+													  long userPhone, String md5) throws SeckillException,
 			RepeatKillException, SeckillCloseException {
 //		if(null == md5 || !md5.equals(getMD5(seckillId))){
 		if(null == md5 || !redisDao.verifyToken(md5,seckillId)){  //*********************************

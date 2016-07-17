@@ -1,9 +1,5 @@
 package org.seckill.service;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seckill.dto.Exposer;
@@ -17,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring/spring-*.xml"})
 public class SeckillServiceTest {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private SeckillService seckillService;
 	@Test
@@ -86,7 +84,7 @@ public class SeckillServiceTest {
 		} catch(SeckillCloseException e) {
 			logger.error(e.getMessage());
 		}
-	
+
 	}
 
 }

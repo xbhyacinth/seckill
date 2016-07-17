@@ -11,7 +11,8 @@ var seckill ={
 			return '/seckill/' + seckillId + '/exposer';
 		},
 		execution: function(seckillId,md5){
-			return '/seckill/' + seckillId + '/' + md5 + '/execution';
+//			return '/seckill/' + seckillId + '/' + md5 + '/execution';
+			return '/seckill01/' + seckillId + '/' + md5 + '/execution';
 		}
 	},
 	//验证手机号
@@ -33,11 +34,12 @@ var seckill ={
 					var md5 = exposer['md5'];
 					if(md5) {
 						var killUrl = seckill.URL.execution(seckillId,md5);
-						console.log('killUrl=' + killUrl);
+//						console.log('killUrl=' + killUrl);
 						//绑定一次点击事件
 						$('#killBtn').one('click',function(){
 							//执行秒杀请求
 							//1.先禁用按钮
+//							debugger
 							$(this).addClass('disable');
 							//2.发送秒杀请求
 							$.post(killUrl, {}, function(result){
@@ -109,7 +111,7 @@ var seckill ={
 					var inputPhone = $('#killPhoneKey').val();
 					if(seckill.validatePhone(inputPhone)) {
 						//电话写入cookie
-						$.cookie('killPhone',inputPhone,{expires: 7, path: '/seckill'});
+						$.cookie('killPhone',inputPhone,{expires: 7, path: '/'});
 						//刷新页面
 						window.location.reload();
 					}else {
