@@ -34,6 +34,13 @@ public class SeckillController {
 		model.addAttribute("list", list);
 		return "list"; //WEB-INF/jsp/list.jsp
 	}
+
+    @RequestMapping(value="/manage",method=RequestMethod.GET)
+    public String manage(Model model) {
+        List<Seckill> list = seckillService.getSeckillList();
+        model.addAttribute("manage", list);
+        return "manage"; //WEB-INF/jsp/list.jsp
+    }
 	
 	@RequestMapping(value="/{seckillId}/detail",method=RequestMethod.GET)
 	public String detail(@PathVariable("seckillId")Long seckillId, Model model) {
@@ -107,9 +114,9 @@ public class SeckillController {
 //    private Date endTime;
 //    private Date createTime;
 
-    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public void addKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable String startTime,@PathVariable String endTime) {
+    public SeckillResult addKillSku(@PathVariable("name") String name,@PathVariable("number") Integer number,@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) {
         SeckillResult result=new SeckillResult();
         Seckill seckill=new Seckill();
         SimpleDateFormat  sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -134,14 +141,15 @@ public class SeckillController {
             result.setError(e.getMessage());
             result.setSuccess(false);
         }
+        return result;
     }
 
-//    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+    //    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 //    @ResponseBody
 //    public void addKillSku(@PathVariable("name") String name,@PathVariable("number") Integer number) {
     @RequestMapping(value="/{seckillId}/{number}/updateKillSku")
     @ResponseBody
-    public void updateKillSku(@PathVariable("seckillId") long seckillId,@PathVariable("number") Integer number) {
+    public SeckillResult updateKillSku(@PathVariable("seckillId") long seckillId,@PathVariable("number") Integer number) {
         SeckillResult result=new SeckillResult();
         Seckill seckill=new Seckill();
         seckill.setNumber(number);
@@ -154,6 +162,10 @@ public class SeckillController {
             result.setError(e.getMessage());
             result.setSuccess(false);
         }
-
+        return result;
     }
+
+
+
+
 }

@@ -40,7 +40,7 @@ public class SeckillServiceImpl implements SeckillService {
 	private final String slat = "djfjhueuweur832hsiudy87e81@&^&#";
 
 	public List<Seckill> getSeckillList() {
-		return seckillDao.queryAll(0, 4);
+		return seckillDao.queryAll(0, 12);
 	}
 
 	public Seckill getById(long seckillId) {

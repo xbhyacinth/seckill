@@ -14,7 +14,7 @@
 .about li.w3 h5 u{ text-decoration:underline;}
 .about li.w3 h6{ *font-size:12px;}
 .about li.w4{ width:253px; border:none;}
-.about li.w4 h4{ clear:left; line-height:20px; padding-top:10px; height:80px; overflow:hidden;}
+.about li.w4 h4{ clear:left; line-height:20px; padding-top:10px; height:100px; overflow:hidden;}
 .about li.w4 h4 img{ display:inline; margin:3px 10px 0 0; width:72px; height:73px;}
 .about li.w4 h4 em{ color:#E02F2F}
 .friendly_links{ margin:20px auto 0; color:#666; width:980px;height:15px;overflow: hidden;}

@@ -54,6 +54,8 @@
 	        </div>
 	    </div>
 	</div>
+    <%@include file="common/footer.jsp" %>
+
   </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
