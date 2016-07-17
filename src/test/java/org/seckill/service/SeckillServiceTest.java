@@ -48,7 +48,7 @@ public class SeckillServiceTest {
         logger.info("exposer={}",exposer);
         if (exposer.isExposed()) {
 
-            long phone = 13141397576L;
+            long phone = 13141397577L;
             String md5 = exposer.getMd5();
 
             try {

@@ -31,24 +31,29 @@ var seckill ={
 				if(exposer['exposed']){
 					//开启秒杀
 					var md5 = exposer['md5'];
-					var killUrl = seckill.URL.execution(seckillId,md5);
-					console.log('killUrl=' + killUrl);
-					//绑定一次点击事件
-					$('#killBtn').one('click',function(){
-						//执行秒杀请求
-						//1.先禁用按钮
-						$(this).addClass('disable');
-						//2.发送秒杀请求
-						$.post(killUrl, {}, function(result){
-							if(result && result['success']){
-								var killResult = result['data'];
-								var state = killResult['state'];
-								var stateInfo = killResult['stateInfo'];
-								//3.显示秒杀结果
-								node.html('<span class="label label-success">' + stateInfo + '</span>');
-							}
+					if(md5) {
+						var killUrl = seckill.URL.execution(seckillId,md5);
+						console.log('killUrl=' + killUrl);
+						//绑定一次点击事件
+						$('#killBtn').one('click',function(){
+							//执行秒杀请求
+							//1.先禁用按钮
+							$(this).addClass('disable');
+							//2.发送秒杀请求
+							$.post(killUrl, {}, function(result){
+								if(result && result['success']){
+									var killResult = result['data'];
+									//var state = killResult['state'];
+									var stateInfo = killResult['stateInfo'];
+									//3.显示秒杀结果
+									node.html('<span class="label label-success">' + stateInfo + '</span>');
+								}
+							});
 						});
-					});
+						
+					}else {
+						node.html('<span class="label label-success">' + '抢完啦~' + '</span>');
+					}
 					node.show();
 				}else {
 					//未开启秒杀

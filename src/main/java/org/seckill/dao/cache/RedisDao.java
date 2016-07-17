@@ -101,4 +101,34 @@ public class RedisDao {
         }
         return null;
     }
+
+	public void setTokenSet(String md5, long seckillId) {
+		try {
+            Jedis jedis = jedisPool.getResource();
+            try {
+                String key = "tokenSet:" + seckillId;
+                jedis.sadd(key,md5); 
+            }finally {
+                jedis.close();
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+        }
+	}
+
+	public boolean verifyToken(String md5, long seckillId) {
+		
+		try {
+            Jedis jedis = jedisPool.getResource();
+            try {
+                String key = "tokenSet:" + seckillId;
+                return jedis.sismember(key, md5); 
+            }finally {
+                jedis.close();
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+        }
+		return false;
+	}
 }

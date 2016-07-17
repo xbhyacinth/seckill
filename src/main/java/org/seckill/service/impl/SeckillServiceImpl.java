@@ -76,10 +76,8 @@ public class SeckillServiceImpl implements SeckillService {
 			return new Exposer(false,seckillId,nowTime.getTime(),startTime.getTime(),endTime.getTime());
 		}
 		String md5 = getMD5(seckillId); 
-//		String md5 = redisDao.getToken(seckillId); 
-//		if(md5 == null) {
-//			
-//		}
+//		String md5 = redisDao.getToken(seckillId);    //****************************
+		redisDao.setTokenSet(md5,seckillId);
 		return new Exposer(true,md5,seckillId);
 	}
 
@@ -99,6 +97,7 @@ public class SeckillServiceImpl implements SeckillService {
 	public SeckillExecution executeSeckill(long id, long userPhone, String md5)
 			throws SeckillException, RepeatKillException, SeckillCloseException {
 		if(md5 == null || !md5.equals(getMD5(id))) {
+//		if(null == md5 || redisDao.verifyToken(md5,seckillId)){   //**************************
 			throw new SeckillException("seckill data rewrite!");
 		}
 		Date now = new Date();
@@ -136,6 +135,7 @@ public class SeckillServiceImpl implements SeckillService {
 			long userPhone, String md5) throws SeckillException,
 			RepeatKillException, SeckillCloseException {
 		if(null == md5 || !md5.equals(getMD5(seckillId))){
+//		if(null == md5 || redisDao.verifyToken(md5,seckillId)){  //*********************************
             //数据被篡改了
             return new SeckillExecution(seckillId, SeckillStateEnum.DATA_REWRITE);
         }
