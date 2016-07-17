@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.Seckill;
@@ -35,6 +36,9 @@ public class SeckillServiceImpl implements SeckillService {
 	@Autowired
 	private SuccessKilledDao successKilledDao;
 	
+	@Autowired 
+	private RedisDao redisDao;
+	
 	//md5盐值字符串，混淆
 	private final String slat = "djfjhueuweur832hsiudy87e81@&^&#";
 
@@ -47,10 +51,24 @@ public class SeckillServiceImpl implements SeckillService {
 	}
 
 	public Exposer exportSeckillUrl(long seckillId) {
-		Seckill seckill = seckillDao.queryById(seckillId);
-		if(seckill == null) {
-			return new Exposer(false,seckillId);
-		}
+//		Seckill seckill = seckillDao.queryById(seckillId);
+//		if(seckill == null) {
+//			return new Exposer(false,seckillId);
+//		}
+		//1、访问redis
+        Seckill seckill = redisDao.getSeckill(seckillId);
+        if(null == seckill){
+            //2、访问数据库
+            seckill = getById(seckillId);
+            if(null == seckill){
+                //当前无秒杀库存商品
+                return new Exposer(false, seckillId);
+            }else{
+                //3、放入redis
+                redisDao.putSeckill(seckill);
+            }
+        }
+        
 		Date startTime = seckill.getStartTime();
 		Date endTime  = seckill.getEndTime();
 		Date nowTime = new Date();
@@ -58,6 +76,10 @@ public class SeckillServiceImpl implements SeckillService {
 			return new Exposer(false,seckillId,nowTime.getTime(),startTime.getTime(),endTime.getTime());
 		}
 		String md5 = getMD5(seckillId); 
+//		String md5 = redisDao.getToken(seckillId); 
+//		if(md5 == null) {
+//			
+//		}
 		return new Exposer(true,md5,seckillId);
 	}
 

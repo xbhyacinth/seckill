@@ -18,8 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-dao.xml",
-					   "classpath:spring/spring-service.xml"})
+@ContextConfiguration({"classpath:spring/spring-*.xml"})
 public class SeckillServiceTest {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -44,12 +43,12 @@ public class SeckillServiceTest {
     @Test
     public void testSeckillLogic() {
 
-        long id = 1001;
+        long id = 1000;
         Exposer exposer = seckillService.exportSeckillUrl(id);
         logger.info("exposer={}",exposer);
         if (exposer.isExposed()) {
 
-            long phone = 13141397575L;
+            long phone = 13141397576L;
             String md5 = exposer.getMd5();
 
             try {
