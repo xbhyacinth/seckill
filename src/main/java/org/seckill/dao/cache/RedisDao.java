@@ -116,7 +116,7 @@ public class RedisDao {
     }
 
     /**
-     * 将token push进redis队列
+     * 清空key
      */
     public void del(String key){
         try {

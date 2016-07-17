@@ -29,7 +29,7 @@ public class StockServiceImpl implements StockService {
     private RedisDao redisDao;
 
     public long initRedisStock(long seckillId) {
-        redisDao.del("token:" + seckillId);
+        initRedis(seckillId);
         Seckill seckill = seckillService.getById(seckillId);
         Set<String> tokenSets = createToken(seckillId,seckill.getNumber());
         for(String token : tokenSets){
@@ -39,7 +39,17 @@ public class StockServiceImpl implements StockService {
     }
 
 
-    public Set<String> createToken(long seckillId,int stockNum){
+    private void initRedis(long seckillId) {
+    	redisDao.del("token:" + seckillId);  //清空token队列
+    	redisDao.del("tokenSet:" + seckillId); //清空tokenSet
+//    	String stockRef = "Seckill:STOCK:" + seckillId;
+//    	redisDao.del(stockRef); //清空库存
+//    	Seckill seckill = seckillService.getById(seckillId);
+    
+	}
+
+
+	public Set<String> createToken(long seckillId,int stockNum){
         Set<String> sets = new HashSet<String>();
         int i = stockNum*15;
         String slat = "creatToken";
