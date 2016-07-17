@@ -51,8 +51,8 @@ public class RedisUtil {
             config.setFairness(true);
             config.setBlockWhenExhausted(true);
 
-            String redis_host = System.getenv("REDIS_HOST");
-            int redis_port = Integer.parseInt(System.getenv("REDIS_PORT"));
+            String redis_host = "127.0.0.1";
+            int redis_port = 6379;
             pool = new JedisPool(config, redis_host, redis_port);
         }
         if(!Constants.THREADLOCAL_MODEL){

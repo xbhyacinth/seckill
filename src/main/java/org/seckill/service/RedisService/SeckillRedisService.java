@@ -4,10 +4,7 @@ import org.seckill.util.RedisUtil;
 import org.seckill.util.Utils;
 import redis.clients.jedis.Jedis;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/
@@ -30,6 +27,25 @@ public class SeckillRedisService {
     public boolean containsKey(Integer itemId,Jedis jedis){
         boolean contain = jedis.exists(STOCK_PREFIX  + itemId);
         return  contain;
+    }
+    public Set<Integer> allIds(Jedis jedis) {
+
+        Set<Integer> ids = new TreeSet<Integer>();
+        Set<String> keys = jedis.keys("Seckill:STOCK:*");
+        for(String key:keys){
+            if(key.startsWith(STOCK_PREFIX )){
+                int begin = key.lastIndexOf(":") + 1;
+                int id = Integer.parseInt(key.substring(begin));
+                ids.add(id);
+            }
+        }
+        return ids;
+    }
+
+    public  Map<Integer,Integer> getAllList(Jedis jedis){
+        List<Integer> itemIds = new ArrayList(allIds(jedis));
+
+       return   getStockAll(itemIds,jedis);
     }
 
     public boolean addStock(int itemId, int stock,Jedis jedis){
@@ -63,7 +79,7 @@ public class SeckillRedisService {
             SeckillRedisService stockService = new SeckillRedisService();
 
             stockService.setStock(2222, 1000,jedis);
-            stockService.setStock(1111, 1000,jedis);
+            stockService.setStock(1111, 0,jedis);
             final int yoo = stockService.getStock(2222,jedis);
 
             List<Integer> foodIds = new ArrayList<Integer>();

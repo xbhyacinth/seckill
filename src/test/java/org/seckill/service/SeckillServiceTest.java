@@ -1,9 +1,5 @@
 package org.seckill.service;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.seckill.dto.Exposer;
@@ -17,13 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-dao.xml",
-					   "classpath:spring/spring-service.xml"})
+@ContextConfiguration({"classpath:spring/spring-*.xml"})
 public class SeckillServiceTest {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private SeckillService seckillService;
 	@Test
@@ -37,35 +34,35 @@ public class SeckillServiceTest {
 		Seckill seckill = seckillService.getById(1000L);
 		logger.info("seckill={}", seckill);
 	}
-	
-    /**
-     * 集成测试：秒杀完整流程，可重复执行
-     */
-    @Test
-    public void testSeckillLogic() {
 
-        long id = 1001;
-        Exposer exposer = seckillService.exportSeckillUrl(id);
-        logger.info("exposer={}",exposer);
-        if (exposer.isExposed()) {
+	/**
+	 * 集成测试：秒杀完整流程，可重复执行
+	 */
+	@Test
+	public void testSeckillLogic() {
 
-            long phone = 13141397575L;
-            String md5 = exposer.getMd5();
+		long id = 1000;
+		Exposer exposer = seckillService.exportSeckillUrl(id);
+		logger.info("exposer={}",exposer);
+		if (exposer.isExposed()) {
 
-            try {
-                SeckillExecution seckillExecution = seckillService.executeSeckill(id, phone, md5);
-                logger.info("result={}",seckillExecution);
-            } catch (RepeatKillException e) {
-            	logger.error(e.getMessage());
-            } catch (SeckillCloseException e) {
-            	logger.error(e.getMessage());
-            }
+			long phone = 13141397576L;
+			String md5 = exposer.getMd5();
 
-        } else {
-        	logger.warn("秒杀未开始：{}",exposer.toString());
-        }
+			try {
+				SeckillExecution seckillExecution = seckillService.executeSeckill(id, phone, md5);
+				logger.info("result={}",seckillExecution);
+			} catch (RepeatKillException e) {
+				logger.error(e.getMessage());
+			} catch (SeckillCloseException e) {
+				logger.error(e.getMessage());
+			}
 
-    }
+		} else {
+			logger.warn("秒杀未开始：{}",exposer.toString());
+		}
+
+	}
 
 	@Test
 	public void testExportSeckillUrl() {
@@ -87,7 +84,7 @@ public class SeckillServiceTest {
 		} catch(SeckillCloseException e) {
 			logger.error(e.getMessage());
 		}
-	
+
 	}
 
 }
