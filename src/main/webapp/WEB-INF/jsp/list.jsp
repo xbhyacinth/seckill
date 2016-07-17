@@ -3,7 +3,12 @@
  <!-- 引入jstl -->
 <%@include file="common/tag.jsp" %>
 	<%@include file="common/head.jsp" %>
+<<<<<<< HEAD
     <title>秒杀列表页面</title>
+=======
+    <title>秒杀列表页面1</title>
+
+>>>>>>> 337c107e2e60f6b007955e92eb5272e62774a48f
   </head>
   <body>
     <%@include file="common/header.jsp" %>
@@ -82,7 +87,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h2>秒杀列表</h2>
-                <a class="btn btn-info" id="addgoods" href="javascript:">添加商品</a>
+
+                <a class="btn btn-info" href="/seckill/addKillSku" target="_blank">添加秒杀商品</a>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover">
