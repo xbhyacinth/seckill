@@ -29,7 +29,7 @@ public enum SeckillStateEnum {
 		return stateInfo;
 	}
 	
-	public SeckillStateEnum stateOf(int index) {
+	public static SeckillStateEnum stateOf(int index) {
 		for(SeckillStateEnum state : values()) {
 			if(state.getState() == index) {
 				return state;

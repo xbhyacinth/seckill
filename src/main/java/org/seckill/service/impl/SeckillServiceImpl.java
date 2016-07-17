@@ -1,7 +1,9 @@
 package org.seckill.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
@@ -14,6 +16,7 @@ import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
 import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
+import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +105,41 @@ public class SeckillServiceImpl implements SeckillService {
 			//所有编译器异常转换成运行时异常
 			throw new SeckillException("seckill inner error: " + e.getMessage());
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public SeckillExecution executeSeckillByProcedure(long seckillId,
+			long userPhone, String md5) throws SeckillException,
+			RepeatKillException, SeckillCloseException {
+		if(null == md5 || !md5.equals(getMD5(seckillId))){
+            //数据被篡改了
+            return new SeckillExecution(seckillId, SeckillStateEnum.DATA_REWRITE);
+        }
+
+        Date killTime = new Date();
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("seckillId", seckillId);
+        paramMap.put("phone", userPhone);
+        paramMap.put("killTime", killTime);
+        paramMap.put("result", null);
+
+        //执行完存储过程之后，result被赋值
+        try {
+            seckillDao.executeSeckillByProcedure(paramMap);
+            //获取result值
+            int result = MapUtils.getInteger(paramMap, "result", -2);
+            if(result == 1){
+                SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
+                return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS,successKilled);
+            }else{
+                return new SeckillExecution(seckillId, SeckillStateEnum.stateOf(result));
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
+        }
 	}
 
 }
