@@ -31,4 +31,16 @@
           #{result, jdbcType=INTEGER,mode=OUT}
         )
     </select>
+
+    <insert id="addBySeckill" parameterType="Seckill" >
+       INSERT INTO
+		seckill(name,number,start_time,end_time,create_time)
+		VALUES(#{name},#{number},#{startTime},#{endTime},#{createTime})
+    </insert>
+
+
+    <update id="updateBySecKill" parameterType="Seckill">
+		update seckill set number=#{number} where seckill_id = #{seckillId}
+	</update>
+
 </mapper>
