@@ -100,11 +100,23 @@ public class SeckillController {
         return new SeckillResult<Long>(true,new Date().getTime());
     }
 
+//    private String name;
+//    private int number;
+//    private Date startTime;
+//    private Date endTime;
+//    private Date createTime;
 
     @RequestMapping(value="/addKillSku")
     @ResponseBody
-    public void addKillSku(@ModelAttribute Seckill seckill) {
+    public void addKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable Date startTime
+    ,@PathVariable Date endTime) {
         SeckillResult result=new SeckillResult();
+        Seckill seckill=new Seckill();
+        seckill.setName(name);
+        seckill.setNumber(number);
+        seckill.setStartTime(startTime);
+        seckill.setEndTime(endTime);
+        seckill.setCreateTime(new Date());
         try{
             seckillService.addSeckill(seckill);
             result.setSuccess(true);
@@ -117,8 +129,15 @@ public class SeckillController {
 
     @RequestMapping(value="/updateKillSku")
     @ResponseBody
-    public void updateKillSku(@ModelAttribute Seckill seckill) {
+    public void updateKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable Date startTime
+            ,@PathVariable Date endTime) {
         SeckillResult result=new SeckillResult();
+        Seckill seckill=new Seckill();
+        seckill.setName(name);
+        seckill.setNumber(number);
+        seckill.setStartTime(startTime);
+        seckill.setEndTime(endTime);
+        seckill.setCreateTime(new Date());
         try{
             seckillService.updateSeckill(seckill);
             result.setSuccess(true);
