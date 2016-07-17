@@ -15,6 +15,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h2>秒杀列表</h2>
+                <a class="btn btn-info addgoods" href="javascript:" target="_blank">添加商品</a>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover">

@@ -24,7 +24,7 @@ public class RedisDao {
 			try{
 				String key = "seckill: " + seckillId;
 				//并没有实现内部序列化操作，自定义序列化
-				jedis
+
 			}finally{
 				jedis.close();
 			}
