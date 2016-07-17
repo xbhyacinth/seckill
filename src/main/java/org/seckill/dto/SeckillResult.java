@@ -5,6 +5,8 @@ public class SeckillResult<T> {
 	private boolean success;
 	private T data;
 	private String error;
+
+    public  SeckillResult(){}
 	
 	public SeckillResult(boolean success, T data) {
 		super();

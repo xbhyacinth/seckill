@@ -16,11 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value="/seckill")
@@ -102,5 +98,35 @@ public class SeckillController {
     @ResponseBody
     public SeckillResult<Long> execute() {
         return new SeckillResult<Long>(true,new Date().getTime());
+    }
+
+
+    @RequestMapping(value="/addKillSku")
+    @ResponseBody
+    public void addKillSku(@ModelAttribute Seckill seckill) {
+        SeckillResult result=new SeckillResult();
+        try{
+            seckillService.addSeckill(seckill);
+            result.setSuccess(true);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            result.setError(e.getMessage());
+            result.setSuccess(false);
+        }
+    }
+
+    @RequestMapping(value="/updateKillSku")
+    @ResponseBody
+    public void updateKillSku(@ModelAttribute Seckill seckill) {
+        SeckillResult result=new SeckillResult();
+        try{
+            seckillService.updateSeckill(seckill);
+            result.setSuccess(true);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            result.setError(e.getMessage());
+            result.setSuccess(false);
+        }
+
     }
 }

@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
 
 @Service
@@ -141,5 +142,17 @@ public class SeckillServiceImpl implements SeckillService {
             return new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
         }
 	}
+
+    @Override
+    public void addSeckill(Seckill seckill)  {
+        Assert.notNull(seckill);
+        seckillDao.addBySeckill(seckill);
+    }
+
+    @Override
+    public void updateSeckill(Seckill seckill) {
+        Assert.notNull(seckill);
+        seckillDao.updateBySecKill(seckill);
+    }
 
 }
