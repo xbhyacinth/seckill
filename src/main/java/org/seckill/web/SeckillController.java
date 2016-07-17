@@ -1,5 +1,6 @@
 package org.seckill.web;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -106,18 +107,26 @@ public class SeckillController {
 //    private Date endTime;
 //    private Date createTime;
 
-    @RequestMapping(value="/addKillSku")
+    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public void addKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable Date startTime
-    ,@PathVariable Date endTime) {
+    public void addKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable String startTime,@PathVariable String endTime) {
         SeckillResult result=new SeckillResult();
         Seckill seckill=new Seckill();
-        seckill.setName(name);
-        seckill.setNumber(number);
-        seckill.setStartTime(startTime);
-        seckill.setEndTime(endTime);
-        seckill.setCreateTime(new Date());
+        SimpleDateFormat  sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        startTime=startTime.replace("a","-");
+        startTime=startTime.replace("b"," ");
+        startTime=startTime.replace("c",":");
+        endTime=endTime.replace("a","-");
+        endTime=endTime.replace("b"," ");
+        endTime=endTime.replace("c",":");
         try{
+            Date st=sdf.parse(startTime);
+            Date et=sdf.parse(endTime);
+            seckill.setName(name);
+            seckill.setNumber(number);
+            seckill.setStartTime(st);
+            seckill.setEndTime(et);
+            seckill.setCreateTime(new Date());
             seckillService.addSeckill(seckill);
             result.setSuccess(true);
         }catch (Exception e){
@@ -127,17 +136,16 @@ public class SeckillController {
         }
     }
 
-    @RequestMapping(value="/updateKillSku")
+//    @RequestMapping(value="/{name}/{number}/{startTime}/{endTime}/addKillSku",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
+//    @ResponseBody
+//    public void addKillSku(@PathVariable("name") String name,@PathVariable("number") Integer number) {
+    @RequestMapping(value="/{seckillId}/{number}/updateKillSku")
     @ResponseBody
-    public void updateKillSku(@PathVariable String name,@PathVariable Integer number,@PathVariable Date startTime
-            ,@PathVariable Date endTime) {
+    public void updateKillSku(@PathVariable("seckillId") long seckillId,@PathVariable("number") Integer number) {
         SeckillResult result=new SeckillResult();
         Seckill seckill=new Seckill();
-        seckill.setName(name);
         seckill.setNumber(number);
-        seckill.setStartTime(startTime);
-        seckill.setEndTime(endTime);
-        seckill.setCreateTime(new Date());
+        seckill.setSeckillId(seckillId);
         try{
             seckillService.updateSeckill(seckill);
             result.setSuccess(true);

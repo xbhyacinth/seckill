@@ -6,7 +6,7 @@
 <html lang="zh-CN">
   <head>
 	<%@include file="common/head.jsp" %>
-    <title>秒杀列表页面</title>
+    <title>秒杀列表页面1</title>
 
   </head>
   <body>
@@ -15,6 +15,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
 				<h2>秒杀列表</h2>
+                <a class="btn btn-info" href="/seckill/addKillSku" target="_blank">添加秒杀商品</a>
 			</div>
 			<div class="panel-body">
 				<table class="table table-hover">
