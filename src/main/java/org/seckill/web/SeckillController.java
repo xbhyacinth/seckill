@@ -82,6 +82,7 @@ public class SeckillController {
 
 		}
 		try{
+			//利用spring
 			SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, phone, md5);
 			return new SeckillResult<SeckillExecution>(true, seckillExecution);
 		} catch(RepeatKillException e) {

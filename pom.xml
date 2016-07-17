@@ -139,6 +139,13 @@
 		<artifactId>protostuff-runtime</artifactId>
 		<version>1.0.8</version>
 	</dependency>
+	
+	<!-- 其他依赖 -->
+	<dependency>
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.1</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>seckill</finalName>

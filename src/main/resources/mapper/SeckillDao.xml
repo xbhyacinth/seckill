@@ -21,4 +21,14 @@
 	<select id="queryAll" resultType="Seckill">
 		select * from seckill order by create_time limit #{offset},#{limit};
 	</select>
+	
+	 <!-- 使用mybatis调用存储过程 -->
+    <select id="executeSeckillByProcedure" statementType="CALLABLE">
+        call execute_seckill(
+          #{seckillId, jdbcType=BIGINT,mode=IN},
+          #{phone, jdbcType=BIGINT,mode=IN},
+          #{killTime, jdbcType=TIMESTAMP,mode=IN},
+          #{result, jdbcType=INTEGER,mode=OUT}
+        )
+    </select>
 </mapper>
