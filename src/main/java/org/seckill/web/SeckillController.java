@@ -82,10 +82,8 @@ public class SeckillController {
 
 		}
 		try{
-			//利用spring控制事务
-//			SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, phone, md5);
-			//利用mysql存储过程
-			SeckillExecution seckillExecution = seckillService.executeSeckillByProcedure(seckillId, phone, md5);
+			//利用spring
+			SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, phone, md5);
 			return new SeckillResult<SeckillExecution>(true, seckillExecution);
 		} catch(RepeatKillException e) {
 			SeckillExecution seckillExecution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT_KILL);
@@ -99,8 +97,6 @@ public class SeckillController {
 			return new SeckillResult<SeckillExecution>(true, seckillExecution);
 		}
 	}
-	
-	
 	
 	@RequestMapping(value = "time/now",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
     @ResponseBody

@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>seckill Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
+	<dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -16,7 +16,7 @@
     </dependency>
     <!-- 补全依赖 -->
     <!-- 1: 日志：slf4j(规范),logback(实现) -->
-    <dependency>
+	  <dependency>
     	<groupId>org.slf4j</groupId>
     	<artifactId>slf4j-api</artifactId>
     	<version>1.7.12</version>
@@ -146,6 +146,13 @@
 	    <artifactId>commons-collections</artifactId>
 	    <version>3.2.1</version>
 	</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.7</version>
+		</dependency>
+
   </dependencies>
   <build>
     <finalName>seckill</finalName>

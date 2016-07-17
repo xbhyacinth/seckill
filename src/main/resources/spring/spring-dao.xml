@@ -25,7 +25,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     	<!-- 配置连接池属性 -->
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-    	<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/seckill?useUnicode=true&amp;characterEncoding=utf8"/>
+    	<property name="jdbcUrl" value="jdbc:mysql://10.14.138.27:3306/seckill?useUnicode=true&amp;characterEncoding=utf8"/>
     	<property name="user" value="brl"/>
     	<property name="password" value="1234"/>
    <!-- 	<property name="driverClass" value="${jdbc.driver}"/>
@@ -57,11 +57,5 @@
     	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     	<!-- 给出需要扫描Dao接口包 -->
     	<property name="basePackage" value="org.seckill.dao"/>
-    </bean>
-    
-    <!-- RedisDao 实际应用中放配置文件中配置 -->
-    <bean id="redisDao" class="org.seckill.dao.cache.RedisDao">
-        <constructor-arg index="0" value="localhost"/>
-        <constructor-arg index="1" value="6379"/>
     </bean>
 </beans>
