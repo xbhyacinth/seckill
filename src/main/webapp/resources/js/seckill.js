@@ -12,7 +12,13 @@ var seckill ={
 		},
 		execution: function(seckillId,md5){
 			return '/seckill/' + seckillId + '/' + md5 + '/execution';
-		}
+		},
+        addgoods:function(){
+            return 'seckill/addKillSku';
+        },
+        updategoods:function(){
+            return 'seckill/updateKillSku';
+        }
 	},
 	//验证手机号
 	validatePhone: function(phone){
@@ -127,51 +133,35 @@ var seckill ={
 			});
 			
 		}
-	}
+	},
 
-
-
-    detail: {
+    add: {
         //详情页初始化
         init : function(params) {
-            //用户手机验证登录，计时交互
-            //在cookie中查找手机号
-            var killPhone = $.cookie('killPhone');
-            //验证手机号
-            if(!seckill.validatePhone(killPhone)) {
-                //绑定phone
-                var killPhoneModal = $('#killPhoneModal');
-                killPhoneModal.modal({
+            $('#addgoods').click(function(){
+                $('#addGoodsDialog').modal({
                     show: true, //显示弹出层
                     backdrop: 'static', //禁止位置关闭
-                    keyboard: false, //关闭键盘事件
+                    keyboard: false //关闭键盘事件
                 });
-                $('#killPhoneBtn').click(function(){
-                    var inputPhone = $('#killPhoneKey').val();
-                    if(seckill.validatePhone(inputPhone)) {
-                        //电话写入cookie
-                        $.cookie('killPhone',inputPhone,{expires: 7, path: '/seckill'});
-                        //刷新页面
-                        window.location.reload();
-                    }else {
-                        $('#killPhoneMessage').hide().html('<label class="label label-danger">手机号错误!</label>').show(300);
-                    }
-                });
-            }
-            //已经登录,计时交互
-            var seckillId = params['seckillId'];
-            var startTime = params['startTime'];
-            var endTime = params['endTime'];
-            $.get(seckill.URL.now(), {}, function(result){
-                if(result && result['success']) {
-                    var now = result['data'];
-                    //时间判断
-                    seckill.countdown(seckillId,now,startTime,endTime);
-                }else {
-                    console.log('result=' + result);
-                }
-            });
 
-        }
+                $('#addBtn').click(function(){
+                    var data={
+                        'name': $('#name').val(),
+                        'number': $('#number').val(),
+                        'startTime': $('#startTime').val(),
+                        'endTime': $('#endTime').val()
+                    };
+                    $.post(seckill.URL.addgoods(),data, function(result){
+                        if(result && result['success']){
+                            //刷新页面
+                            window.location.reload();
+                        }else{
+                            alert("失败了哦");
+                        }
+                    });
+                });
+            });
+       }
     }
 }
