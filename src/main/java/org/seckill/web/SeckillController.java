@@ -157,6 +157,7 @@ public class SeckillController {
         Seckill seckill=new Seckill();
         seckill.setNumber(number);
         seckill.setSeckillId(seckillId);
+
         try{
             seckillService.updateSeckill(seckill);
             result.setSuccess(true);
