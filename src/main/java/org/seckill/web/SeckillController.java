@@ -12,6 +12,7 @@ import org.seckill.enums.SeckillStateEnum;
 import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
 import org.seckill.service.SeckillService;
+import org.seckill.util.StockCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class SeckillController {
 
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(Model model) {
-		List<Seckill> list = seckillService.getSeckillList();
+		List<Seckill> list = StockCache.stockCache;
+		if(list.isEmpty()) {
+			list = seckillService.getSeckillList();
+			StockCache.stockCache = list;
+		}
 		model.addAttribute("list", list);
 		return "list"; //WEB-INF/jsp/list.jsp
 	}

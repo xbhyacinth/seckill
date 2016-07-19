@@ -129,14 +129,14 @@
 
   </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 <%--使用CDN 获取公共js http://www.bootcdn.cn/--%>
 <%--jQuery Cookie操作插件--%>
-<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/resources/js/jquery.cookie.min.js"></script>
 <%--jQuery countDown倒计时插件--%>
-<script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
+<script src="/resources/js/jquery.countdown.min.js"></script>
 <!-- 引入js逻辑 -->
 <script src="/resources/js/seckill.js" type="text/javascript"></script>
 <script type="text/javascript">

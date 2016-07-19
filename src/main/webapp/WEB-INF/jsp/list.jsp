@@ -18,7 +18,7 @@
                     <% java.util.Date date =new java.util.Date();%>
                     <c:forEach var="sk" items="${list}">
                         <div class="qg-item qg-ing">
-                            <img class="qg-img" src="https://img.alicdn.com/bao/uploaded/i1/109480251167762542/TB2tg2XsFXXXXa4XpXXXXXXXXXX_!!0-juitemmedia.jpg_220x220q90.jpg">
+                            <img class="qg-img" src="/resources/images/image.jpg">
                             <div class="qg-detail">
                                 <div class="name">
                                     <p class="des">${sk.name}</p>
@@ -27,7 +27,7 @@
 
                                 <div class="process">
                                     <div class="process-text">
-                                        <span>库存：<em>${sk.number}</em></span>
+                                        <span>总库存：<em>${sk.number}</em></span>
                                         <span>开始时间：<em><fmt:formatDate value="${sk.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/></em></span>
                                         <span>结束世界： <em><fmt:formatDate value="${sk.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/></em> </span>
                                     </div>
@@ -133,14 +133,14 @@
 
   </body>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 <%--使用CDN 获取公共js http://www.bootcdn.cn/--%>
 <%--jQuery Cookie操作插件--%>
-<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/resources/js/jquery.cookie.min.js"></script>
 <%--jQuery countDown倒计时插件--%>
-<script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
+<script src="/resources/js/jquery.countdown.min.js"></script>
 <!-- 引入js逻辑 -->
 <script src="/resources/js/seckill.js" type="text/javascript"></script>
 <script type="text/javascript">

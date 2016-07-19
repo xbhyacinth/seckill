@@ -7,6 +7,7 @@ import org.seckill.entity.Seckill;
 import org.seckill.entity.SuccessKilled;
 import org.seckill.service.SeckillService;
 import org.seckill.service.StockService;
+import org.seckill.util.StockCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class StockServiceImpl implements StockService {
     public long initRedisStock(long seckillId) {
         initRedis(seckillId);
         Seckill seckill = seckillDao.queryById(seckillId);
+        StockCache.stockCache = seckillDao.queryAll(0, 12);
         Set<String> tokenSets = createToken(seckillId,seckill.getNumber());
         for(String token : tokenSets){
             redisDao.pushToken(seckillId,token);
@@ -109,6 +111,7 @@ public class StockServiceImpl implements StockService {
 					seckill.setSeckillId(seckillId);
 					seckillDao.updateBySecKill(seckill);
 				}
+				StockCache.stockCache = seckillDao.queryAll(0, 12);
 				return count;
 			} finally {
 				jedis.close();
