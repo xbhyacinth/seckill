@@ -21,4 +21,18 @@
 		on sk.seckill_id = s.seckill_id
 		where sk.seckill_id = #{seckillId} and sk.user_phone = #{userPhone};
 	</select>
+	
+	<!-- 批量插入order记录 -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		<![CDATA[
+			insert ignore into success_killed (seckill_id,user_phone,state)
+			VALUES 
+		]]>	
+			<foreach collection="list" item="item" index="index" separator="," >  
+		         <![CDATA[
+		         	(#{item.seckillId},#{item.userPhone},#{item.state})
+		         ]]>
+		    </foreach>  
+	</insert>
+	
 </mapper>

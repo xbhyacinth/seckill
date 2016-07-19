@@ -11,8 +11,15 @@ var seckill ={
 			return '/seckill/' + seckillId + '/exposer';
 		},
 		execution: function(seckillId,md5){
-			return '/seckill/' + seckillId + '/' + md5 + '/execution';
-		}
+//			return '/seckill/' + seckillId + '/' + md5 + '/execution';
+			return '/seckill01/' + seckillId + '/' + md5 + '/execution';
+		},
+        addgoods:function(){
+            return '/seckill/addKillSku';
+        },
+        updategoods:function(seckillId,number){
+            return '/seckill/' + seckillId +'/'+number+'/updateKillSku';
+        }
 	},
 	//验证手机号
 	validatePhone: function(phone){
@@ -33,11 +40,12 @@ var seckill ={
 					var md5 = exposer['md5'];
 					if(md5) {
 						var killUrl = seckill.URL.execution(seckillId,md5);
-						console.log('killUrl=' + killUrl);
+//						console.log('killUrl=' + killUrl);
 						//绑定一次点击事件
 						$('#killBtn').one('click',function(){
 							//执行秒杀请求
 							//1.先禁用按钮
+//							debugger
 							$(this).addClass('disable');
 							//2.发送秒杀请求
 							$.post(killUrl, {}, function(result){
@@ -103,13 +111,13 @@ var seckill ={
 				killPhoneModal.modal({
 					show: true, //显示弹出层
 					backdrop: 'static', //禁止位置关闭
-					keyboard: false, //关闭键盘事件
+					keyboard: false //关闭键盘事件
 				});
 				$('#killPhoneBtn').click(function(){
 					var inputPhone = $('#killPhoneKey').val();
 					if(seckill.validatePhone(inputPhone)) {
 						//电话写入cookie
-						$.cookie('killPhone',inputPhone,{expires: 7, path: '/seckill'});
+						$.cookie('killPhone',inputPhone,{expires: 7, path: '/'});
 						//刷新页面
 						window.location.reload();
 					}else {
@@ -132,5 +140,100 @@ var seckill ={
 			});
 			
 		}
-	}
+	},
+
+    add: {
+        //添加商品初始化
+        init : function(params) {
+            $('#addgoods').click(function(){
+                $('#addGoodsDialog').modal({
+                    show: true, //显示弹出层
+                    backdrop: 'static', //禁止位置关闭
+                    keyboard: false ,//关闭键盘事件
+                });
+                $('#addBtn').click(function(){
+
+                    var name=  $('#name').val();
+                    var number= $('#number').val();
+                    var startTime=$('#startTime').val();
+                    var endTime=$('#endTime').val();
+
+                    if(name.length==0||name == null){
+                        alert("商品名称不能为空！") ;
+                        return;
+                    }
+                    if(number.length==0||number == null){
+                        alert("商品库存不能为空！") ;
+                        return;
+                    }
+                    if(startTime.length==0||startTime == null){
+                        alert("开始时间不能为空！") ;
+                        return;
+                    }
+                    if(endTime.length==0||endTime == null){
+                        alert("结束时间不能为空！") ;
+                        return;
+                    }
+
+
+                    startTime=startTime.replace('-','a');
+                    startTime=startTime.replace('-','a');
+                    startTime=startTime.replace(' ','b');
+                    startTime=startTime.replace(':','c');
+                    startTime=startTime.replace(':','c');
+                    endTime=endTime.replace('-','a');
+                    endTime=endTime.replace('-','a');
+                    endTime=endTime.replace(' ','b');
+                    endTime=endTime.replace(':','c');
+                    endTime=endTime.replace(':','c');
+
+                   var  urls= '/seckill/' + name + '/' + number +'/'+startTime+'/'+endTime+'/addKillSku';
+                    $.post(urls, {}, function(result){
+                        if(result && result['success']) {
+                            window.location.reload();
+                        }else {
+                            alert("添加商品失败！");
+                        }
+                    });
+                });
+            });
+       }
+    },
+
+
+    update:{
+        //修改库存初始化
+        init : function(params) {
+
+            $('#logout').click(function(){
+                alert("注销成功！");
+                setCookie("killPhone", 1, -1);
+                window.location.reload();
+            });
+
+            $('.updategoods').click(function(){
+                var itemid = this.getAttribute("itemid");   //商品iid
+                $('#updateGoodsDialog').modal({
+                    show: true, //显示弹出层
+                    backdrop: 'static', //禁止位置关闭
+                    keyboard: false//关闭键盘事件
+
+                });
+                $('#updateBtn').click(function(){
+                    var number=$('#newnumber').val();
+                    if(number.length==0||number == null){
+                        alert("库存不能为空！") ;
+                        return;
+                    }
+                    $.post(seckill.URL.updategoods(itemid,number), {}, function(result){
+                        if(result && result['success']) {
+                            window.location.reload();
+                        }else {
+                            alert("更新库存失败！");
+                        }
+                    });
+                });
+            });
+        }
+    }
 }

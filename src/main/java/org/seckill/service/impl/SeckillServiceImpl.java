@@ -1,10 +1,6 @@
 package org.seckill.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import org.apache.commons.collections.MapUtils;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dao.cache.RedisDao;
@@ -17,33 +13,38 @@ import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
 import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
-import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SeckillServiceImpl implements SeckillService {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private SeckillDao seckillDao;
-	
+
 	@Autowired
 	private SuccessKilledDao successKilledDao;
-	
-	@Autowired 
+
+	@Autowired
 	private RedisDao redisDao;
-	
+
 	//md5盐值字符串，混淆
 	private final String slat = "djfjhueuweur832hsiudy87e81@&^&#";
 
 	public List<Seckill> getSeckillList() {
-		return seckillDao.queryAll(0, 4);
+		return seckillDao.queryAll(0, 12);
 	}
 
 	public Seckill getById(long seckillId) {
@@ -56,27 +57,27 @@ public class SeckillServiceImpl implements SeckillService {
 //			return new Exposer(false,seckillId);
 //		}
 		//1、访问redis
-        Seckill seckill = redisDao.getSeckill(seckillId);
-        if(null == seckill){
-            //2、访问数据库
-            seckill = getById(seckillId);
-            if(null == seckill){
-                //当前无秒杀库存商品
-                return new Exposer(false, seckillId);
-            }else{
-                //3、放入redis
-                redisDao.putSeckill(seckill);
-            }
-        }
-        
+		Seckill seckill = redisDao.getSeckill(seckillId);
+		if(null == seckill){
+			//2、访问数据库
+			seckill = getById(seckillId);
+			if(null == seckill){
+				//当前无秒杀库存商品
+				return new Exposer(false, seckillId);
+			}else{
+				//3、放入redis
+				redisDao.putSeckill(seckill);
+			}
+		}
+
 		Date startTime = seckill.getStartTime();
 		Date endTime  = seckill.getEndTime();
 		Date nowTime = new Date();
 		if(nowTime.getTime() < startTime.getTime() || nowTime.getTime() > endTime.getTime()) {
 			return new Exposer(false,seckillId,nowTime.getTime(),startTime.getTime(),endTime.getTime());
 		}
-		String md5 = getMD5(seckillId); 
-//		String md5 = redisDao.getToken(seckillId);    //****************************
+//		String md5 = getMD5(seckillId);
+		String md5 = redisDao.getToken(seckillId);    //****************************
 		redisDao.setTokenSet(md5,seckillId);
 		return new Exposer(true,md5,seckillId);
 	}
@@ -86,7 +87,7 @@ public class SeckillServiceImpl implements SeckillService {
 		String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
 		return md5;
 	}
-	
+
 	@Transactional
 	/**
 	 * 使用注解控制事务的优点：
@@ -96,8 +97,8 @@ public class SeckillServiceImpl implements SeckillService {
 	 */
 	public SeckillExecution executeSeckill(long id, long userPhone, String md5)
 			throws SeckillException, RepeatKillException, SeckillCloseException {
-		if(md5 == null || !md5.equals(getMD5(id))) {
-//		if(null == md5 || redisDao.verifyToken(md5,seckillId)){   //**************************
+//		if(md5 == null || !md5.equals(getMD5(id))) {
+		if(null == md5 || !redisDao.verifyToken(md5,id)){   //**************************
 			throw new SeckillException("seckill data rewrite!");
 		}
 		Date now = new Date();
@@ -115,7 +116,7 @@ public class SeckillServiceImpl implements SeckillService {
 				} else {
 					SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(id,userPhone);
 					return new SeckillExecution(id,SeckillStateEnum.SUCCESS,successKilled);
-				}			
+				}
 			}
 		} catch(SeckillCloseException e1) {
 			throw e1;
@@ -127,15 +128,15 @@ public class SeckillServiceImpl implements SeckillService {
 			throw new SeckillException("seckill inner error: " + e.getMessage());
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public SeckillExecution executeSeckillByProcedure(long seckillId,
-			long userPhone, String md5) throws SeckillException,
+													  long userPhone, String md5) throws SeckillException,
 			RepeatKillException, SeckillCloseException {
-		if(null == md5 || !md5.equals(getMD5(seckillId))){
-//		if(null == md5 || redisDao.verifyToken(md5,seckillId)){  //*********************************
+//		if(null == md5 || !md5.equals(getMD5(seckillId))){
+		if(null == md5 || !redisDao.verifyToken(md5,seckillId)){  //*********************************
             //数据被篡改了
             return new SeckillExecution(seckillId, SeckillStateEnum.DATA_REWRITE);
         }
@@ -163,5 +164,15 @@ public class SeckillServiceImpl implements SeckillService {
             return new SeckillExecution(seckillId, SeckillStateEnum.INNER_ERROR);
         }
 	}
+
+    public void addSeckill(Seckill seckill)  {
+        Assert.notNull(seckill);
+        seckillDao.addBySeckill(seckill);
+    }
+
+    public void updateSeckill(Seckill seckill) {
+        Assert.notNull(seckill);
+        seckillDao.updateBySecKill(seckill);
+    }
 
 }

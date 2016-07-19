@@ -55,4 +55,22 @@ public class SeckillDaoTest {
 		}
 	}
 
+    @Test
+    public void addSeckill() {
+       Seckill seckill=new Seckill();
+        seckill.setName("dsadsa");
+        seckill.setNumber(100);
+        seckill.setCreateTime(new Date());
+        seckillDao.addBySeckill(seckill);
+    }
+
+    @Test
+    public void updateSeckill() {
+        Seckill seckill=new Seckill();
+        seckill.setSeckillId(1014);
+        seckill.setName("dsadsa");
+        seckill.setNumber(1000);
+        seckillDao.updateBySecKill(seckill);
+    }
+
 }
