@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                     http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <!-- Master cluter -->
+    <bean id="configClientShop" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">
+        <property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>
+    </bean>
+    <bean id="redisClientShop"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">
+        <property name="configClient" ref="configClientShop"/>
+        <property name="token" value="1417623612434"/>
+        <property name="configId" value="/redis/cluster/17"/>
+    </bean>
+    <bean id="jedisCacheUtils" class="org.seckill.util.JedisCacheUtils">
+        <property name="flag" value="YZ"></property>
+        <property name="cluster" ref="redisClientShop"></property>
+    </bean>
+
+    <!-- Slave cluter1-->
+    <bean id="backupConfigClientShop1" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">
+        <property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>
+    </bean>
+    <bean id="backupRedisClientShop1"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">
+        <property name="configClient" ref="backupConfigClientShop1"/>
+        <property name="token" value="1417623612434"/>
+        <property name="configId" value="/redis/cluster/17"/>
+    </bean>
+
+    <bean id="backupJedisCacheUtils1" class="org.seckill.util.JedisCacheUtils">
+        <property name="flag" value="HC"></property>
+        <property name="cluster" ref="backupRedisClientShop1" />
+    </bean>
+
+
+
+    <bean id="jshopCacheUtils" class="org.seckill.util.TKillCacheUtils">
+        <property name="jedisCacheUtilsGroup">
+            <map>
+                <entry key="1" value-ref="jedisCacheUtils" />
+                <entry key="2" value-ref="backupJedisCacheUtils1" />
+            </map>
+        </property>
+    </bean>
+
+</beans>
