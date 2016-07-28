@@ -6,32 +6,38 @@
        default-autowire="byName">
 
     <!-- Master cluter -->
-    <bean id="configClientShop" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">
-        <property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>
-    </bean>
-    <bean id="redisClientShop"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">
-        <property name="configClient" ref="configClientShop"/>
-        <property name="token" value="1417623612434"/>
-        <property name="configId" value="/redis/cluster/17"/>
+    <!--<bean id="configClientShop" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">-->
+        <!--<property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>-->
+    <!--</bean>-->
+
+    <!--<bean id="redisClientShop"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">-->
+        <!--<property name="configClient" ref="configClientShop"/>-->
+        <!--<property name="token" value="1417623612434"/>-->
+        <!--<property name="configId" value="/redis/cluster/17"/>-->
+    <!--</bean>-->
+    <bean id="jimClient" class="com.jd.jim.cli.ReloadableJimClientFactoryBean">
+        <property name="jimUrl" value="jim://1803528671997086613/2" />
     </bean>
     <bean id="jedisCacheUtils" class="org.seckill.util.JedisCacheUtils">
+        <!--<constructor-arg index="0" value="YZ"/>-->
+        <!--<constructor-arg index="1" ref="redisClientShop"/>-->
         <property name="flag" value="YZ"></property>
-        <property name="cluster" ref="redisClientShop"></property>
+        <property name="cluster" ref="jimClient"></property>
     </bean>
 
     <!-- Slave cluter1-->
-    <bean id="backupConfigClientShop1" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">
-        <property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>
-    </bean>
-    <bean id="backupRedisClientShop1"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">
-        <property name="configClient" ref="backupConfigClientShop1"/>
-        <property name="token" value="1417623612434"/>
-        <property name="configId" value="/redis/cluster/17"/>
-    </bean>
+    <!--<bean id="backupConfigClientShop1" class="com.jd.jim.cli.config.client.ConfigLongPollingClientFactoryBean">-->
+        <!--<property name="serviceEndpoint" value="http://cfs.jim.jd.local"></property>-->
+    <!--</bean>-->
+    <!--<bean id="backupRedisClientShop1"  class="com.jd.jim.cli.compat.ReloadableJimClientFactoryBean">-->
+        <!--<property name="configClient" ref="backupConfigClientShop1"/>-->
+        <!--<property name="token" value="1417623612434"/>-->
+        <!--<property name="configId" value="/redis/cluster/17"/>-->
+    <!--</bean>-->
 
     <bean id="backupJedisCacheUtils1" class="org.seckill.util.JedisCacheUtils">
         <property name="flag" value="HC"></property>
-        <property name="cluster" ref="backupRedisClientShop1" />
+        <property name="cluster" ref="jimClient" />
     </bean>
 
 

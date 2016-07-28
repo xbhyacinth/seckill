@@ -17,8 +17,9 @@ import javax.annotation.Resource;
  */
 public class KillCacheDao {
 
-    @Resource
-    private TKillCacheUtils tKillCacheUtils;
+    private static TKillCacheUtils tKillCacheUtils;
+
+
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -110,6 +111,11 @@ public class KillCacheDao {
             logger.error(e.getMessage(), e);
         }
         return false;
+    }
+
+
+    public static void settKillCacheUtils(TKillCacheUtils tKillCacheUtils) {
+        tKillCacheUtils = tKillCacheUtils;
     }
 
 }

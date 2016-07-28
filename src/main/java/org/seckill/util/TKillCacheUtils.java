@@ -266,6 +266,11 @@ public class TKillCacheUtils {
         return fieldStr;
     }
 
+    /**
+     * 获取正在使用的缓存主集群
+     *
+     * @return
+     */
     protected JedisCacheUtils getCacheClusterInUse() {
         return jedisCacheUtilsGroup.get("1");
     }

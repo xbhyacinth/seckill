@@ -2,6 +2,7 @@ package org.seckill.util;
 
 
 import com.jd.jim.cli.Cluster;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
