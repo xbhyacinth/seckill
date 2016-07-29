@@ -32,6 +32,15 @@ public class JedisCacheUtils {
     private Cluster cluster;
 
     /**
+     * single add
+     * @param key
+     * @return
+     */
+    public Long sadd(String key,String... value) {
+        return cluster.sAdd(key,value);
+    }
+
+    /**
      * Return the type of the value stored at key in form of a string. The type
      * can be one of  "none", "string", "list", "set". "none" is returned if the
      * key does not exist.
@@ -49,7 +58,7 @@ public class JedisCacheUtils {
      * @param key the key under which this object should be added
      * @return
      */
-    public Long delete(String key) {
+    public Long delete(String... key) {
         return cluster.del(key);
     }
 
@@ -62,6 +71,31 @@ public class JedisCacheUtils {
     public Boolean exists(String key) {
         return cluster.exists(key);
     }
+
+
+    public Boolean isMember(String key,String value) {
+        return cluster.sIsMember(key,value);
+    }
+    /**
+     * push value into list
+     *
+     * @param key
+     * @return
+     */
+    public Long lpush(String key,String value) {
+        return cluster.lPush(key,value);
+    }
+
+    /**
+     * push value into list
+     *
+     * @param key
+     * @return
+     */
+    public String rpop(String key) {
+        return cluster.rPop(key);
+    }
+
 
     /**
      * Set string expre to redis cluster

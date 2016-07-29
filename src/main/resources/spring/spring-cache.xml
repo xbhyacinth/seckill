@@ -34,15 +34,19 @@
         <!--<property name="token" value="1417623612434"/>-->
         <!--<property name="configId" value="/redis/cluster/17"/>-->
     <!--</bean>-->
+    <bean id="jimClient1" class="com.jd.jim.cli.ReloadableJimClientFactoryBean">
+        <property name="jimUrl" value="jim://2809907038999011671/4" />
+    </bean>
+
 
     <bean id="backupJedisCacheUtils1" class="org.seckill.util.JedisCacheUtils">
         <property name="flag" value="HC"></property>
-        <property name="cluster" ref="jimClient" />
+        <property name="cluster" ref="jimClient1" />
     </bean>
 
 
 
-    <bean id="jshopCacheUtils" class="org.seckill.util.TKillCacheUtils">
+    <bean id="tKillCacheUtils" class="org.seckill.util.TKillCacheUtils">
         <property name="jedisCacheUtilsGroup">
             <map>
                 <entry key="1" value-ref="jedisCacheUtils" />

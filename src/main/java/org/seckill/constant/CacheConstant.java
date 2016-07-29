@@ -81,10 +81,16 @@ public class CacheConstant {
     public static class CacheKey {
 
         public static String getTokenKey(long seckillId){
-            return "TokenKey"+String.valueOf(seckillId);
+            return "token:"+String.valueOf(seckillId);
+        }
+        public static String getTokenSetKey(long seckillId){
+            return "tokenSet:"+String.valueOf(seckillId);
         }
         public static String getKillKey(long seckillId){
             return "SecKill"+String.valueOf(seckillId);
+        }
+        public static String getStockKey(long seckillId){
+            return "Seckill:STOCK:"+String.valueOf(seckillId);
         }
     }
 }

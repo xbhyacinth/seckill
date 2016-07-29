@@ -1,11 +1,12 @@
 package org.seckill.service.impl;
 
+import org.seckill.common.KillCacheTemplate;
+import org.seckill.constant.CacheConstant;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dao.cache.RedisDao;
 import org.seckill.entity.Seckill;
 import org.seckill.entity.SuccessKilled;
-import org.seckill.service.SeckillService;
 import org.seckill.service.StockService;
 import org.seckill.util.StockCache;
 import org.slf4j.Logger;
@@ -14,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
-
-import com.dyuproject.protostuff.ProtostuffIOUtil;
 
 import redis.clients.jedis.Jedis;
 
@@ -36,12 +35,13 @@ public class StockServiceImpl implements StockService {
     
     @Autowired
     private SeckillDao seckillDao;
-    
+
     @Autowired
     private SuccessKilledDao successKilledDao;
 
     @Autowired
     private RedisDao redisDao;
+
 
     public long initRedisStock(long seckillId) {
         initRedis(seckillId);
@@ -72,6 +72,18 @@ public class StockServiceImpl implements StockService {
 			logger.error(e.getMessage(), e);
 		}
 	}
+
+//    private void initJim(long seckillId) {
+//        try {
+//            KillCacheTemplate.de("token:" + seckillId, "tokenSet:" + seckillId);  //清空token队列
+//            String stockRef = CacheConstant.CacheKey.getStockKey(seckillId);
+//            killCacheDao.del(stockRef); //清空库存
+//            Seckill seckill = seckillDao.queryById(seckillId);
+//            killCacheDao.setStock(seckillId, String.valueOf(seckill.getNumber()));//设置库存
+//        } catch (Exception e) {
+//            logger.error(e.getMessage(), e);
+//        }
+//    }
 
 
 	public Set<String> createToken(long seckillId,int stockNum){

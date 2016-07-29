@@ -3,23 +3,14 @@ package org.seckill.dao.cache;
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
-
 import org.seckill.entity.Seckill;
-import org.seckill.service.RedisService.SeckillRedisService;
 import org.seckill.util.Constants;
-import org.seckill.util.RedisUtil;
-import org.seckill.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class RedisDao {
 	private final JedisPool jedisPool;

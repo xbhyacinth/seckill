@@ -1,11 +1,9 @@
 package org.seckill.util;
 
-import org.seckill.dao.cache.KillCacheDao;
+import org.seckill.common.KillCacheTemplate;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +24,8 @@ public class SpringContextUtils implements ApplicationContextAware {
      */
     public void init() {
         // 注入缓存模板工具中的缓存工具实例
-        TKillCacheUtils cacheUtils = (TKillCacheUtils) applicationContext.getBean("jshopCacheUtils");
-        KillCacheDao.settKillCacheUtils(cacheUtils);
+        TKillCacheUtils cacheUtils = (TKillCacheUtils) applicationContext.getBean("tKillCacheUtils");
+        KillCacheTemplate.settKillCacheUtils(cacheUtils);
 
     }
 

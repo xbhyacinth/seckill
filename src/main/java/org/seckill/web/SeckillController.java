@@ -1,6 +1,7 @@
 package org.seckill.web;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class SeckillController {
 
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(Model model) {
-		List<Seckill> list = StockCache.stockCache;
+		List<Seckill> list =new ArrayList<Seckill>();
 		if(list.isEmpty()) {
 			list = seckillService.getSeckillList();
 			StockCache.stockCache = list;

@@ -1,8 +1,8 @@
 package org.seckill.util;
 
+import com.sun.istack.internal.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Map;
 
 /**
@@ -20,6 +20,79 @@ public class TKillCacheUtils {
      * 配置缓存集群Map，支持多个缓存集群的配置，利用Key进行区分，在缓存切换时根据Key从中获取对应的缓存服务进行使用
      */
     protected Map<String, JedisCacheUtils> jedisCacheUtilsGroup;
+
+
+    /**
+     * 加入set中only once
+     *
+     * @param key 缓存对象标识
+     * @param value   缓存对象
+     */
+    public Long singleAdd(@NotNull String key, @NotNull String value) {
+        boolean isM=false;
+        for (Map.Entry<String, JedisCacheUtils> entry : jedisCacheUtilsGroup.entrySet()) {
+            try {
+                return entry.getValue().sadd(key, value);
+            } catch (Exception e) {
+                logger.error("Failed to push a object to the cache cluster！cache cluster key is" + entry.getKey(), e);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 缓存对象是否在list中
+     *
+     * @param key 缓存对象标识
+     * @param value   缓存对象
+     */
+    public boolean isMember(@NotNull String key, @NotNull String value) {
+        boolean isM=false;
+        for (Map.Entry<String, JedisCacheUtils> entry : jedisCacheUtilsGroup.entrySet()) {
+            try {
+                isM=isM||entry.getValue().isMember(key, value);
+            } catch (Exception e) {
+                logger.error("Failed to push a object to the cache cluster！cache cluster key is" + entry.getKey(), e);
+            }
+        }
+        return isM;
+    }
+
+
+    /**
+     * push缓存对象into list
+     *
+     * @param key 缓存对象标识
+     * @param value   缓存对象
+     */
+    public void push(String key, String value) {
+        if (value == null) {
+            return;
+        }
+        for (Map.Entry<String, JedisCacheUtils> entry : jedisCacheUtilsGroup.entrySet()) {
+            try {
+                entry.getValue().lpush(key, value);
+            } catch (Exception e) {
+                logger.error("Failed to push a object to the cache cluster！cache cluster key is" + entry.getKey(), e);
+            }
+        }
+    }
+
+    /**
+     * push缓存对象into list
+     *
+     * @param key 缓存对象标识
+     */
+    public String pop(@NotNull String key) {
+        for (Map.Entry<String, JedisCacheUtils> entry : jedisCacheUtilsGroup.entrySet()) {
+            try {
+                return  entry.getValue().rpop(key);
+            } catch (Exception e) {
+                logger.error("Failed to pop a object to the cache cluster！cache cluster key is" + entry.getKey(), e);
+            }
+        }
+        return "";
+    }
 
     /**
      * 设置缓存对象
@@ -175,7 +248,7 @@ public class TKillCacheUtils {
      * @param key 缓存对象标识
      * @return
      */
-    public void delete(String key) {
+    public void delete(String... key) {
         for (Map.Entry<String, JedisCacheUtils> entry : jedisCacheUtilsGroup.entrySet()) {
             try {
                 entry.getValue().delete(key);
